@@ -12,7 +12,7 @@ def Connect():
     global ser
     # global status
     # global running
-    port_sel = 'COM8'
+    port_sel = 'COM9'
     print("Connecting")
     ser = serial.Serial(port = port_sel, baudrate =  9600, timeout=1)
     time.sleep(2)
@@ -20,8 +20,11 @@ def Connect():
 def con(m = 0):
     # global is_reading_serial
     line = str(ser.readline()).replace('r','').replace('n','').replace('\\','').replace('b','').replace('\'','')
+
     # print(line)
     try:
+        line = int(line)
+        line= 1023 - line
         lg.plt_telemetry(int(line))
     except:
         print('TLM - N/A')
